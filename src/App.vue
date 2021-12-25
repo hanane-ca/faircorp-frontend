@@ -1,25 +1,27 @@
 <template>
   <div id="app">
-    <p>{{ msg }}</p>
+    <navigationBar></navigationBar>
     <rooms></rooms>
   </div>
 </template>
 
 <script>
-import Rooms from './components/rooms.vue'
+import Rooms from './components/windows.vue'
+import NavigationBar from './components/navigation_bar.vue'
 
 export default {
   name: "app",
   components: {
-    'rooms' : Rooms
+    'rooms' : Rooms,
+    'navigationBar' : NavigationBar
   },
   data() {
     return {
-      msg: "Faircorp"
     };
   }
 };
 </script>
 
 <style>
+
 </style>

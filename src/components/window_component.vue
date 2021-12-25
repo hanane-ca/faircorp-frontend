@@ -1,21 +1,34 @@
 <template>
-  <div class="container">
-    <div v-for="window in windows" :key="window.id" class="window">
-      <windowComponent v-bind:windowInfo="window"></windowComponent>
-    </div>
-  </div>
+      <table>
+        <tr>
+          <th>{{ windowInfo.name }}</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>room id :</td>
+          <td>
+            {{ windowInfo.id }}
+          </td>
+        </tr>
+        <tr>
+          <td>room Name :</td>
+          <td>
+            {{ windowInfo.roomName }}
+          </td>
+        </tr>
+        <tr>
+          <td>Status :</td>
+          <td>{{ windowInfo.windowStatus }}</td>
+        </tr>
+      </table>
 </template>
 
 <script>
-import WindowComponent from "./window_component.vue";
 export default {
+    props : ['windowInfo'],
   data() {
     return {
-      windows: []
     };
-  },
-  components: {
-    windowComponent: WindowComponent,
   },
   created() {
     this.$http
@@ -29,18 +42,6 @@ export default {
 </script>
 
 <style>
-.window {
-  background-color: rgb(230, 250, 159);
-  width: 25%;
-  margin: 5px;
-  text-align: center;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 20px;
-}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

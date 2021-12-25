@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div v-for="window in windows" :key="window.id" class="window">
-      <windowComponent v-bind:windowInfo="window"></windowComponent>
-    </div>
+    <windowComponent v-bind:windowInfo="window"></windowComponent>
   </div>
 </template>
 
@@ -11,7 +9,7 @@ import WindowComponent from "./window_component.vue";
 export default {
   data() {
     return {
-      windows: []
+      window: {}
     };
   },
   components: {
@@ -19,10 +17,10 @@ export default {
   },
   created() {
     this.$http
-      .get("https://hanane-chrif.cleverapps.io/api/windows")
+      .get("https://hanane-chrif.cleverapps.io/api/windows/")
       .then(function (data) {
         console.log(data);
-        this.windows = data.body;
+        this.window = data.body;
       });
   },
 };
