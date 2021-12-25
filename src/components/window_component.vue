@@ -1,42 +1,46 @@
 <template>
-      <table>
-        <tr>
-          <th>{{ windowInfo.name }}</th>
-          <th></th>
-        </tr>
-        <tr>
-          <td>room id :</td>
-          <td>
-            {{ windowInfo.id }}
-          </td>
-        </tr>
-        <tr>
-          <td>room Name :</td>
-          <td>
-            {{ windowInfo.roomName }}
-          </td>
-        </tr>
-        <tr>
-          <td>Status :</td>
-          <td>{{ windowInfo.windowStatus }}</td>
-        </tr>
-      </table>
+  <table>
+    <tr>
+      <th>{{ windowInfo.name }}</th>
+      <th v-on:click="deleteWindow(windowInfo.id)" class="delete">X</th>
+    </tr>
+    <tr>
+      <td>room id :</td>
+      <td>
+        {{ windowInfo.id }}
+      </td>
+    </tr>
+    <tr>
+      <td>room Name :</td>
+      <td>
+        {{ windowInfo.roomName }}
+      </td>
+    </tr>
+    <tr>
+      <td>Status :</td>
+      <td>{{ windowInfo.windowStatus }}</td>
+    </tr>
+  </table>
 </template>
 
 <script>
 export default {
-    props : ['windowInfo'],
+  props: ["windowInfo"],
   data() {
-    return {
-    };
+    return {};
   },
-  created() {
-    this.$http
-      .get("https://hanane-chrif.cleverapps.io/api/windows")
-      .then(function (data) {
-        console.log(data);
-        this.windows = data.body;
-      });
+  methods: {
+    deleteWindow: function (id) {
+      this.$http
+        .delete(`https://hanane-chrif.cleverapps.io/api/windows/${id}`)
+        .then(function (response) {
+          console.log(response);
+          window.location.reload()
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -60,5 +64,9 @@ th {
   border-left: 0px;
   border-right: 0px;
   text-align: right;
+}
+
+.delete {
+  color: red;
 }
 </style>

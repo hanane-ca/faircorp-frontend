@@ -1,8 +1,11 @@
 <template>
-  <div class="container">
-    <div v-for="window in windows" :key="window.id" class="window">
-      <windowComponent v-bind:windowInfo="window"></windowComponent>
+  <div>
+    <div class="container">
+      <div v-for="window in windows" :key="window.id" class="window">
+        <windowComponent v-bind:windowInfo="window"></windowComponent>
+      </div>
     </div>
+    <button v-on:click="createWindow()">Create</button>
   </div>
 </template>
 
@@ -11,7 +14,7 @@ import WindowComponent from "./window_component.vue";
 export default {
   data() {
     return {
-      windows: []
+      windows: [],
     };
   },
   components: {
@@ -24,6 +27,30 @@ export default {
         console.log(data);
         this.windows = data.body;
       });
+  },
+  methods: {
+    createWindow() {
+      this.$http
+        .post("https://hanane-chrif.cleverapps.io/api/windows/", {
+          
+          name: "window3",
+          roomId: -10,
+          roomName: "room1",
+          windowStatus: "CLOSED",
+        })
+        .then(function (response) {
+          console.log(response);
+          window.location.reload();
+          this.windows.push({
+          name: "window3",
+          roomId: -10,
+          roomName: "room1",
+          windowStatus: "CLOSED",});
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -41,23 +68,17 @@ export default {
   flex-wrap: wrap;
   margin: 20px;
 }
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  border: 1px solid #000000;
-  width: 100%;
-}
 
-td,
-th {
-  border: 1px solid #000000;
+button {
+  background-color: #3d633e;
+  border: none;
+  color: white;
+  padding: 15px 32px;
   text-align: center;
-  padding: 8px;
-}
-
-th {
-  border-left: 0px;
-  border-right: 0px;
-  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+  margin: 10px 40%;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div>
     <ul>
-      <li><a href="#">Buildings</a></li>
-      <li><a href="#">Rooms</a></li>
-      <li><a href="#">Windows</a></li>
-      <li><a href="#">Heaters</a></li>
+      <li><router-link to='/buildings' exact>Buildings</router-link></li>
+      <li><router-link to='/rooms' exact>Rooms</router-link></li>
+      <li><router-link to='/windows' exact>Windows</router-link></li>
+      <li><router-link to='/heaters' exact>Heaters</router-link></li>
     </ul>
   </div>
 </template>
@@ -39,8 +39,10 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
-  background-color: #111;
+
+.router-link-active {
+  background-color: rgb(170, 169, 169);
+  color: black;
 }
 
 </style>
