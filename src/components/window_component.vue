@@ -7,7 +7,7 @@
     <tr>
       <td>room id :</td>
       <td>
-        {{ windowInfo.id }}
+        {{ windowInfo.roomId }}
       </td>
     </tr>
     <tr>
@@ -18,7 +18,7 @@
     </tr>
     <tr>
       <td>Status :</td>
-      <td>{{ windowInfo.windowStatus }}</td>
+      <td class="statut" v-on:click="changeStatut(windowInfo.id)">{{ windowInfo.windowStatus }}</td>
     </tr>
   </table>
 </template>
@@ -41,6 +41,17 @@ export default {
           console.log(error);
         });
     },
+    changeStatut: function (id) {
+      this.$http
+        .put(`https://hanane-chrif.cleverapps.io/api/windows/${id}/switch`)
+        .then(function (response) {
+          console.log(response);
+          window.location.reload()
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   },
 };
 </script>
@@ -68,5 +79,10 @@ th {
 
 .delete {
   color: red;
+  cursor: pointer;
+}
+
+.statut {
+  cursor: pointer;
 }
 </style>

@@ -5,6 +5,7 @@ import heaters from './components/heaters';
 import buildings from './components/buildings'
 
 export default [
+    {path:'/', component: windows},
     {path:'/buildings', component: buildings},
     {path:'/windows', component: windows},
     {path:'/rooms', component: rooms},
